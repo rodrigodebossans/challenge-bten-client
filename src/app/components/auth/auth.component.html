@@ -1,0 +1,27 @@
+<main class="p-grid auth">
+  <aside class="p-col p-py-5 p-d-none p-d-lg-block">
+    <section class="p-text-center p-p-7">
+      <img
+        class="p-d-block p-m-auto"
+        src="./assets/images/logo-light.png"
+        alt="logo bten"
+        width="120"
+      />
+      <h1 class="p-my-3 color-white">CHALLENGE FULLSTACK</h1>
+      <p class="p-my-3">Website using Angular 11 and Node.js</p>
+    </section>
+  </aside>
+  <aside class="p-col p-d-flex p-jc-center p-p-3 p-p-sm-">
+    <section class="p-text-center p-as-center">
+      <ng-content select=".title"></ng-content>
+      <section class="p-grid p-jc-center p-my-6">
+        <p-card styleClass="card-form-wrap">
+          <ng-content select=".body"></ng-content>
+        </p-card>
+      </section>
+      <section class="footer">
+        <ng-content select=".footer"></ng-content>
+      </section>
+    </section>
+  </aside>
+</main>

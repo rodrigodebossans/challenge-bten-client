@@ -1,0 +1,222 @@
+<p-menu #_userMenuItems [popup]="true" [model]="userMenuItems"></p-menu>
+<main class="p-grid">
+  <!-- SIDEMENU -->
+  <aside
+    class="p-d-none p-d-sm-flex"
+    [class]="visible ? 'p-col-fixed' : ''"
+    [style]="visible ? { width: '300px' } : {}"
+  >
+    <section class="p-p-7">
+      <p-sidebar
+        [(visible)]="visible"
+        [showCloseIcon]="false"
+        [modal]="false"
+        [closeOnEscape]="false"
+        styleClass="sidemenu p-p-0"
+      >
+        <div class="area-logo p-p-4 overlay">
+          <img
+            class="p-d-block p-m-auto"
+            src="./assets/images/logo-light.png"
+            alt="logo bten"
+            width="80"
+          />
+        </div>
+        <div class="menu p-mt-4">
+          <p-panelMenu
+            styleClass="menu"
+            [model]="sidebarMenutems"
+          ></p-panelMenu>
+        </div>
+      </p-sidebar>
+    </section>
+  </aside>
+  <aside class="main-content p-col p-p-0">
+    <!-- HEADER -->
+    <section class="main-header p-col p-d-flex p-jc-between">
+      <i
+        class="pi pi-bars toggle-icon p-as-center p-p-2 p-d-none p-d-sm-block"
+        [class.hidden]="!visible"
+        (click)="visible = !visible"
+      ></i>
+      <div class="p-as-center">
+        <img
+          class="p-d-block p-d-sm-none"
+          src="./assets/images/logo-topo.png"
+          alt="logo bten"
+          width="80"
+        />
+      </div>
+      <div class="user-info p-d-flex p-p-2">
+        <div class="p-as-center">
+          <div class="cursor-pointer" (click)="_userMenuItems.toggle($event)">
+            <span class="p-d-none p-d-lg-inline-block">
+              {{ userService.getStoredUser()?.name | titlecase }}
+            </span>
+            <i class="pi pi-angle-down p-ml-2 p-d-none p-d-lg-inline-block"></i>
+            <p-avatar
+              class="p-ml-2"
+              styleClass="bg-green color-white"
+              [label]="
+                (userService.getStoredUser()?.name?.substring(0, 2)
+                  | uppercase) || ''
+              "
+              shape="circle"
+              size="medium"
+            ></p-avatar>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <section class="main-body p-col p-p-5">
+      <div *ngIf="dashboardData$ | async as dashboardData; else pending">
+        <!-- TITLE -->
+        <section class="p-grid">
+          <div class="p-col">
+            <h1 class="color-green p-text-normal">Dashboad</h1>
+          </div>
+        </section>
+
+        <!-- COUNTERS -->
+        <section class="p-grid">
+          <div class="p-col">
+            <p-card styleClass="dash-card bg-image-graph p-text-center">
+              <p>Unsolved</p>
+              <h1 class="number color-green-light">
+                {{ dashboardData.unresolved }}
+              </h1>
+            </p-card>
+          </div>
+          <div class="p-col">
+            <p-card styleClass="dash-card bg-image-graph p-text-center">
+              <p>Overdue</p>
+              <h1 class="number color-green-light">
+                {{ dashboardData.overdue }}
+              </h1>
+            </p-card>
+          </div>
+          <div class="p-col">
+            <p-card styleClass="dash-card bg-image-graph p-text-center">
+              <p>Open</p>
+              <h1 class="number color-green-light">
+                {{ dashboardData.open }}
+              </h1>
+            </p-card>
+          </div>
+          <div class="p-col">
+            <p-card styleClass="dash-card bg-image-graph p-text-center">
+              <p>On hold</p>
+              <h1 class="number color-green-light">
+                {{ dashboardData.onHold }}
+              </h1>
+            </p-card>
+          </div>
+        </section>
+
+        <!-- TRENDS -->
+        <section class="p-grid">
+          <div class="p-col p-mt-3">
+            <p-card styleClass="dash-card graph-card p-p-0">
+              <div class="p-grid">
+                <!-- GRAPH -->
+                <aside class="p-col-12 p-lg-8 p-p-5">
+                  <h1 class="color-green-light p-text-bold p-m-0 p-pb-2">
+                    Trends
+                  </h1>
+                  <small
+                    >Updated at
+                    {{ dashboardData.trends.updatedAt | date: "medium" }}</small
+                  >
+                  <br /><br /><br /><br />
+                  <p-chart
+                    type="line"
+                    [responsive]="true"
+                    [data]="dashboardData.trends.graph.data"
+                    [options]="graphOptions"
+                  ></p-chart>
+                </aside>
+                <!-- TRENDS COUNTERS -->
+                <aside class="p-col-12 p-d-flex p-lg-4 p-p-0">
+                  <div class="p-col p-p-0 p-as-center">
+                    <div class="p-grid p-p-0">
+                      <div class="p-col">
+                        <div class="p-text-center border-bottom">
+                          <p>Resolved</p>
+                          <h1 class="number color-green-light">
+                            {{ dashboardData.trends.resolved }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-grid p-p-0">
+                      <div class="p-col">
+                        <div class="p-text-center border-bottom">
+                          <p>Received</p>
+                          <h1 class="number color-green-light">
+                            {{ dashboardData.trends.received }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-grid p-p-0">
+                      <div class="p-col">
+                        <div class="p-text-center border-bottom">
+                          <p>Average first response time</p>
+                          <h1 class="number color-green-light">
+                            {{ dashboardData.trends.avgFirstResponseTime }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-grid p-p-0">
+                      <div class="p-col">
+                        <div class="p-text-center border-bottom">
+                          <p>Average response time</p>
+                          <h1 class="number color-green-light">
+                            {{ dashboardData.trends.avgResponseTime }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="p-grid p-p-0">
+                      <div class="p-col">
+                        <div class="p-text-center">
+                          <p>Resolution within SAL</p>
+                          <h1 class="number color-green-light">
+                            {{
+                              dashboardData.trends.resolutionWithinSLA | percent
+                            }}
+                          </h1>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </p-card>
+          </div>
+        </section>
+      </div>
+      <ng-template #pending>
+        <div
+          *ngIf="error$ | async; else loading"
+          class="p-text-center p-pt-6 p-mt-6"
+        >
+          <p>We were unable to bring your data, please try again later</p>
+        </div>
+        <ng-template #loading>
+          <section class="p-grid">
+            <div class="p-col p-text-center p-pt-6 p-mt-6">
+              <i
+                class="pi pi-spin pi-spinner color-green-light p-mt-6"
+                style="font-size: 2rem"
+              ></i>
+            </div>
+          </section>
+        </ng-template>
+      </ng-template>
+    </section>
+  </aside>
+</main>

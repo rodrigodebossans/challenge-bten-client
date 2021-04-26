@@ -1,0 +1,43 @@
+::ng-deep {
+  .auth {
+    aside {
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+
+      section {
+        &.p-p-7 {
+          padding: 7rem 0rem;
+        }
+
+        h1 {
+          font-size: 2rem;
+          letter-spacing: 0.3rem;
+        }
+
+        p {
+          color: var(--green-light-color-100);
+        }
+      }
+
+      &:first-child {
+        background-color: var(--green-color);
+        background-image: url("../../../assets/images/bg-graph-auth-left.svg");
+        background-position: 42% 140%;
+        background-repeat: no-repeat;
+        background-size: 320%;
+      }
+
+      &:last-child {
+        background-image: url("../../../assets/images/bg-map-auth-right.svg");
+        background-position: center 60%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+      }
+
+      @media screen and (max-width: 991px) {
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,162 @@
+<app-auth>
+  <section class="title">
+    <h1 class="color-green-light p-my-3">SIGN UP</h1>
+    <p class="p-my-3">Please, complete to create your account.</p>
+  </section>
+
+  <section class="body">
+    <form
+      (ngSubmit)="onSubmit()"
+      #userForm="ngForm"
+      appPasswordConfirmedValidator
+    >
+      <div class="p-fluid p-grid">
+        <!-- Name  -->
+        <div class="p-field p-col-12 p-sm-6">
+          <span class="p-float-label">
+            <input
+              id="name"
+              name="name"
+              type="text"
+              pInputText
+              [(ngModel)]="user.name"
+              #name="ngModel"
+              required
+            />
+            <label for="name">Name</label>
+          </span>
+        </div>
+        <!-- Home Team  -->
+        <div class="p-field p-col-12 p-sm-6">
+          <span class="p-float-label">
+            <input
+              id="homeTeam"
+              name="homeTeam"
+              type="text"
+              pInputText
+              [(ngModel)]="user.homeTeam"
+              #homeTeam="ngModel"
+            />
+            <label for="homeTeam">Home Team</label>
+          </span>
+        </div>
+      </div>
+      <div class="p-fluid p-grid">
+        <!-- Age  -->
+        <div class="p-field p-col-12 p-sm-6">
+          <span class="p-float-label">
+            <input
+              id="age"
+              name="age"
+              type="number"
+              pInputText
+              [(ngModel)]="user.age"
+              #age="ngModel"
+              required
+            />
+            <label for="age">Age</label>
+          </span>
+        </div>
+        <!-- Height  -->
+        <div class="p-field p-col-12 p-sm-6">
+          <span class="p-float-label">
+            <input
+              id="height"
+              name="height"
+              type="number"
+              min="0.0"
+              step="0.1"
+              pInputText
+              [(ngModel)]="user.height"
+              #height="ngModel"
+            />
+            <label for="height">Height</label>
+          </span>
+        </div>
+      </div>
+      <div class="p-fluid p-grid">
+        <!-- Email  -->
+        <div class="p-field p-col-12">
+          <span class="p-float-label">
+            <input
+              id="email"
+              name="email"
+              [ngClass]="
+                email.dirty || email.touched
+                  ? email.invalid
+                    ? 'ng-invalid'
+                    : 'ng-valid'
+                  : ''
+              "
+              type="email"
+              pInputText
+              [(ngModel)]="user.email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              #email="ngModel"
+              required
+            />
+            <label for="email">Email</label>
+          </span>
+        </div>
+      </div>
+      <div class="p-fluid p-grid">
+        <!-- Password  -->
+        <div class="p-field p-col-12">
+          <span class="p-float-label">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              pInputText
+              [(ngModel)]="user.password"
+              #password="ngModel"
+              required
+            />
+            <label for="password">Password</label>
+          </span>
+        </div>
+      </div>
+      <div class="p-fluid p-grid">
+        <!-- Confirm Password  -->
+        <div class="p-field p-col-12">
+          <span class="p-float-label">
+            <input
+              id="confirmPasswords"
+              name="confirmPassword"
+              [ngClass]="
+                confirmPassword.dirty || confirmPassword.touched
+                  ? !userForm.getError('wrongConfirmation')
+                    ? ''
+                    : 'wrong-confirmation'
+                  : ''
+              "
+              type="password"
+              pInputText
+              ngModel
+              #confirmPassword="ngModel"
+              required
+            />
+            <label for="confirmPassword">Confirm Password</label>
+          </span>
+        </div>
+      </div>
+      <div class="p-fluid p-grid p-mt-4">
+        <div class="p-col-12">
+          <button
+            class="bg-green"
+            pButton
+            type="submit"
+            [disabled]="userForm.invalid"
+            icon="pi pi-arrow-right"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="footer">
+    <a class="color-green" routerLink="/signin">
+      <span>Already have an account? Sign in.</span>
+    </a>
+  </section>
+</app-auth>

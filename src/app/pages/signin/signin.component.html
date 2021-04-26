@@ -1,0 +1,73 @@
+<app-auth>
+  <section class="title">
+    <h1 class="color-green-light p-my-3">SIGN IN</h1>
+    <p class="p-my-3">Welcome back! Please login to your account.</p>
+  </section>
+
+  <section class="body">
+    <form
+      (ngSubmit)="onSubmit()"
+      #loginForm="ngForm"
+      appPasswordConfirmedValidator
+    >
+      <div class="p-fluid p-grid">
+        <!-- Email  -->
+        <div class="p-field p-col-12 p-md-6">
+          <span class="p-float-label">
+            <input
+              id="email"
+              name="email"
+              [ngClass]="
+                email.dirty || email.touched
+                  ? email.invalid
+                    ? 'ng-invalid'
+                    : 'ng-valid'
+                  : ''
+              "
+              type="email"
+              pInputText
+              [(ngModel)]="user.email"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              #email="ngModel"
+              required
+            />
+            <label for="email">Email</label>
+          </span>
+        </div>
+        <!-- Password  -->
+        <div class="p-field p-col-12 p-md-6">
+          <span class="p-float-label">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              pInputText
+              [(ngModel)]="user.password"
+              #password="ngModel"
+              required
+            />
+            <label for="password">Password</label>
+          </span>
+        </div>
+      </div>
+      <div class="p-fluid p-grid"></div>
+      <div class="p-fluid p-grid p-mt-4">
+        <div class="p-col-12">
+          <button
+            class="bg-green"
+            pButton
+            type="submit"
+            [disabled]="loginForm.invalid"
+            icon="pi pi-arrow-right"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="footer">
+    <a class="color-green" routerLink="/signup">
+      <span>Not have an account yet? Sign up.</span>
+    </a>
+  </section>
+</app-auth>

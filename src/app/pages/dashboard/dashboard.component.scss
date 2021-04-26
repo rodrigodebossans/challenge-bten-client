@@ -1,0 +1,79 @@
+::ng-deep {
+  .main-content {
+    height: 100vh;
+
+    .main-header {
+      height: 73px;
+      background-color: var(--white-color);
+
+      box-shadow: 0 2px 15px 2px rgb(0 0 0 / 5%), 0 1px 1px 0 rgb(0 0 0 / 2%),
+        0 1px 3px 0 rgb(0 0 0 / 12%);
+
+      .toggle-icon {
+        font-size: 1.5rem;
+        color: var(--green-color);
+        border-radius: 50%;
+
+        &:hover {
+          background-color: var(--gray-color-150);
+
+          cursor: pointer;
+        }
+      }
+
+      .user-info {
+        .cursor-pointer {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .main-body {
+      .dash-card {
+        box-shadow: 0px 30px 60px 5px rgba(85, 85, 85, 0.1);
+        border-radius: 20px;
+
+        &.bg-image-graph {
+          background-image: url("../../../assets/images/bg-graph.svg");
+          background-repeat: no-repeat;
+          background-position: center 100%;
+          background-size: 80%;
+        }
+
+        .number {
+          font-size: 3rem;
+          margin: 1rem;
+          color: #007a7c;
+        }
+
+        &.graph-card {
+          h1 {
+            font-size: 1.5rem;
+          }
+
+          .p-card-content,
+          .p-card-body {
+            padding: 0;
+          }
+
+          aside {
+            &:first-child {
+              border-right: 1px solid var(--gray-color-150);
+
+              @media screen and (max-width: 991px) {
+                border-right: none;
+              }
+            }
+
+            &:last-child {
+              .border-bottom {
+                width: 99%;
+                border-bottom: 1px solid var(--gray-color-150);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

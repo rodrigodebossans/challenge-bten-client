@@ -1,0 +1,67 @@
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  2% {
+    -webkit-transform: scaleX(1.25) scaleY(0.75);
+    transform: scaleX(1.25) scaleY(0.75);
+  }
+  6% {
+    -webkit-transform: scaleX(0.75) scaleY(1.25);
+    transform: scaleX(0.75) scaleY(1.25);
+  }
+  10% {
+    -webkit-transform: scaleX(1.15) scaleY(0.85);
+    transform: scaleX(1.15) scaleY(0.85);
+  }
+  14% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  2% {
+    -webkit-transform: scaleX(1.25) scaleY(0.75);
+    transform: scaleX(1.25) scaleY(0.75);
+  }
+  6% {
+    -webkit-transform: scaleX(0.75) scaleY(1.25);
+    transform: scaleX(0.75) scaleY(1.25);
+  }
+  10% {
+    -webkit-transform: scaleX(1.15) scaleY(0.85);
+    transform: scaleX(1.15) scaleY(0.85);
+  }
+  14% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.p-button {
+  background-color: var(--green-light-color);
+  color: var(--white-color);
+}
+
+.p-button:hover:not(:disabled),
+.p-button:focus:not(:disabled) {
+  background: var(--green-color) !important;
+  color: var(--white-color) !important;
+}
+
+.p-button:disabled:hover {
+  cursor: not-allowed;
+}
+
+.p-button[type="submit"]:not(:disabled) {
+  -webkit-animation: shake 3s;
+  animation: shake 3s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
